@@ -5,8 +5,8 @@ def rand_number(quantity)
   while i < quantity do
     Thread.new {
       semaphore.synchronize {
-        yield(i, rand(10))  
         i += 1
+        yield(i, rand(10))  
       }
     }
   end
