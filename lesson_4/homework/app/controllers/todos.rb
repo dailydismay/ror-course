@@ -9,10 +9,9 @@ module Controllers
 
 
         get '/todos' do
-            # Dao::TodoDao.get_instance
-            # dao = Dao::TodoDao.get_instance
-            # @todos = dao.list_all
-            @todos = Db::ConnManager.conn.exec("SELECT * FROM todos;")
+            Dao::TodoDao.get_instance
+            dao = Dao::TodoDao.get_instance
+            @todos = dao.list_all
             erb :todos
         end
     end

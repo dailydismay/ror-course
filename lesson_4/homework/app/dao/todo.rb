@@ -2,13 +2,15 @@ require_relative '../db/db'
 
 module Dao
     class BaseDao
+        private_class_method :new
+
         def initialize(conn)
             @conn = conn
         end
 
-        def get_instance
+        def self.get_instance
             unless @instance
-                @instance = self.class.new Db::ConnManager.conn
+                @instance = new Db::ConnManager.conn
             end
             @instance
         end
