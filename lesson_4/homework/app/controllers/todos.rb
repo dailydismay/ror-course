@@ -1,16 +1,18 @@
 require 'sinatra/base'
-require '../dao/todo'
+require_relative '../dao/todo'
 
 include Dao
 
 module Controllers
-    class TodosController::base
+    class TodosController < Sinatra::Base
+        set :views, Proc.new { File.join(root, '../views') }
+
+
         get '/todos' do
-
-            dao = TodoDao.get_instance
-
-            @todos = dao.list_all
-
+            # Dao::TodoDao.get_instance
+            # dao = Dao::TodoDao.get_instance
+            # @todos = dao.list_all
+            @todos = Db::ConnManager.conn.exec("SELECT * FROM todos;")
             erb :todos
         end
     end

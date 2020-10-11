@@ -1,16 +1,20 @@
-require '../db/conn'
-
-include ConnManager
+require_relative '../db/db'
 
 module Dao
-    class TodoDao
-
-        private_class_method :new
-
+    class BaseDao
         def initialize(conn)
             @conn = conn
         end
 
+        def get_instance
+            unless @instance
+                @instance = self.class.new Db::ConnManager.conn
+            end
+            @instance
+        end
+    end
+
+    class TodoDao < BaseDao
         def create(create_todo)
             @conn.exec(
                 "INSERT INTO todos (title, done) VALUES ('#{create_todo.title}', '#{create_todo.done}');"
@@ -18,16 +22,9 @@ module Dao
         end
 
         def list_all
-            data = @conn.exec(
-                "SELECT * FROM todos;"
-            )
+            @conn.exec(
+                            "SELECT * FROM todos;"
+                        )
         end
-
-        def get_instance
-            if !@instance
-                @instance = TodoDao.new ConnManager.conn
-            end
-            @instance
-        end
-    end 
+    end
 end

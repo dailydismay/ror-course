@@ -1,9 +1,9 @@
 <table>
     <% @todos.each do |todo| %>
-      <tr data-href="/deputy/<%= deputy.id %>">
-        <td><%= todo.id %></td>
-        <td><%= todo.title %></td>
-        <td><%= todo.done %></td>
+      <tr data-href="/todos/<%= todo["id"] %>">
+        <td><%= todo["id"] %></td>
+        <td><%= todo["title"] %></td>
+        <td><%= todo["done"] %></td>
       </tr>
     <% end %>
 </table>
