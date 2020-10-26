@@ -68,8 +68,10 @@ class LinkedList
   def each(&block)
     curr = @head
 
+    
     while curr
       block.call(curr.value)
+      # yield(curr.value)
       curr = curr.next
     end
 
@@ -85,4 +87,6 @@ l_l.add 7
 l_l.remove 6
 
 l_l.each {|val| puts val}
+
+puts l_l.inject { |prev, cur| prev + cur }
 

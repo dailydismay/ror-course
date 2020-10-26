@@ -23,8 +23,6 @@ class TodoApp < Sinatra::Base
     configure :development do
         enable  :logging
     end
-
-
     # configure :development do
     #     enable :dump_errors, :raise_errors
     #     use ::BetterErrors::Middleware
